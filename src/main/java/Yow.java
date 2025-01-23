@@ -1,6 +1,11 @@
-import java.util.Scanner;
+import java.util.*;
 
 public class Yow {
+    ArrayList<String> checklist;
+
+    public Yow() {
+        checklist = new ArrayList<>();
+    }
 
     public void run() {
         Boolean stopCommand = false;
@@ -13,8 +18,18 @@ public class Yow {
 
             if (userInput.equals("bye")) {
                 stopCommand = true;
+            } else if (userInput.equals("list")){
+                String listText = "";
+                for (int i = 0; i < checklist.size(); i++ ) {
+                    listText += (i + 1) + ". " + checklist.get(i);
+                    if (i < checklist.size() - 1) {
+                        listText += "\n";
+                    }
+                }
+                prettyPrint(listText);
             } else {
-                echo(userInput);
+                checklist.add(userInput);
+                addToListEcho(userInput);
             }
         }
 
@@ -41,6 +56,10 @@ public class Yow {
 
     public void echo(String input) {
         prettyPrint(input);
+    }
+
+    public void addToListEcho(String listItem) {
+        prettyPrint("added: " + listItem);
     }
 
     public static void main(String[] args) {
