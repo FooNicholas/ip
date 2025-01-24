@@ -24,41 +24,17 @@ public class Yow {
                     prettyPrint(listText);
                 }
 
-                case "mark" -> {
-                    String[] parts = userInput.split(" ");
-                    if (parts.length == 2) {
-                        int taskNumber = Integer.parseInt(parts[1]) - 1;
-                        if (taskNumber >= 0 && taskNumber < checklist.size()) {
-                            checklist.get(taskNumber).markDone();
-                            printMarked(checklist.get(taskNumber));
-                        } else {
-                            prettyPrint("Invalid task number!");
-                        }
-                    } else {
-                        prettyPrint("Invalid command! Use 'mark <number>'.");
-                    }
-                }
+                case "mark" -> handleMarkCommand(userInput);
 
-                case "unmark" -> {
-                    String[] parts = userInput.split(" ");
-                    if (parts.length == 2) {
-                        int taskNumber = Integer.parseInt(parts[1]) - 1;
-                        if (taskNumber >= 0 && taskNumber < checklist.size()) {
-                            checklist.get(taskNumber).markUndone();
-                            printUnmarked(checklist.get(taskNumber));
-                        } else {
-                            prettyPrint("Invalid task number!");
-                        }
-                    } else {
-                        prettyPrint("Invalid command! Use 'unmark <number>'.");
-                    }
-                }
+                case "unmark" -> handleUnmarkCommand(userInput);
 
-                default -> {
-                    Task freshTask = new Task(userInput);
-                    checklist.add(freshTask);
-                    addToListEcho(userInput);
-                }
+                case "todo" -> handleTodoCommand(userInput);
+
+                case "deadline" -> handleDeadlineCommand(userInput);
+
+                case "event" -> handleEventCommand(userInput);
+
+                default -> prettyPrint("Please use: todo, deadline, event, list, mark, unmark, or bye yow.");
             }
         }
 
@@ -83,10 +59,6 @@ public class Yow {
         prettyPrint("Bye. Hope to see you again soon yow!");
     }
 
-    public void echo(String input) {
-        prettyPrint(input);
-    }
-
     public String stringifyList() {
         String listText = "";
         for (int i = 0; i < checklist.size(); i++ ) {
@@ -98,10 +70,6 @@ public class Yow {
         return listText;
     }
 
-    public void addToListEcho(String listItem) {
-        prettyPrint("added: " + listItem);
-    }
-
     public void printMarked(Task targetTask) {
         prettyPrint("Nice! I've marked this task as done yow:\n  "
                 + targetTask.toString());
@@ -111,6 +79,80 @@ public class Yow {
         prettyPrint("OK, I've marked this task as not done yet yow:\n  "
                 + targetTask.toString());
     }
+
+    private void handleMarkCommand(String userInput) {
+        String[] parts = userInput.split(" ");
+        if (parts.length == 2) {
+            int taskNumber = Integer.parseInt(parts[1]) - 1;
+            if (taskNumber >= 0 && taskNumber < checklist.size()) {
+                checklist.get(taskNumber).markDone();
+                printMarked(checklist.get(taskNumber));
+            } else {
+                prettyPrint("Invalid task number yow!");
+            }
+        } else {
+            prettyPrint("Invalid command yow! Use 'mark <number>'.");
+        }
+    }
+
+    private void handleUnmarkCommand(String userInput) {
+        String[] parts = userInput.split(" ");
+        if (parts.length == 2) {
+            int taskNumber = Integer.parseInt(parts[1]) - 1;
+            if (taskNumber >= 0 && taskNumber < checklist.size()) {
+                checklist.get(taskNumber).markUndone();
+                printUnmarked(checklist.get(taskNumber));
+            } else {
+                prettyPrint("Invalid task number yow!");
+            }
+        } else {
+            prettyPrint("Invalid command yow! Use 'unmark <number>'.");
+        }
+    }
+
+    private void handleTodoCommand(String userInput) {
+        String description = userInput.substring(5).trim();
+        if (!description.isEmpty()) {
+            ToDos todo = new ToDos(description);
+            checklist.add(todo);
+            prettyPrint("Got it. I've added this task:\n  " + todo.toString() +
+                    "\nNow you have " + checklist.size() + " tasks in the list.");
+        } else {
+            prettyPrint("The description of a todo cannot be empty yow!");
+        }
+    }
+
+    private void handleDeadlineCommand(String userInput) {
+        String input = userInput.substring(9).trim();
+        String[] parts = input.split(" /by ", 2);
+        if (parts.length == 2) {
+            Deadlines deadline = new Deadlines(parts[0], parts[1]);
+            checklist.add(deadline);
+            prettyPrint("Got it. I've added this task:\n  " + deadline.toString() +
+                    "\nNow you have " + checklist.size() + " tasks in the list.");
+        } else {
+            prettyPrint("Invalid format yow! Use: deadline <description> /by <time>");
+        }
+    }
+
+    private void handleEventCommand(String userInput) {
+        String input = userInput.substring(6).trim();
+        String[] parts = input.split(" /from ", 2);
+        if (parts.length == 2) {
+            String[] timeParts = parts[1].split(" /to ", 2);
+            if (timeParts.length == 2) {
+                Events event = new Events(parts[0], timeParts[0], timeParts[1]);
+                checklist.add(event);
+                prettyPrint("Got it. I've added this task:\n  " + event.toString() +
+                        "\nNow you have " + checklist.size() + " tasks in the list.");
+            } else {
+                prettyPrint("Invalid format yow! Use: event <description> /from <start time> /to <end time>");
+            }
+        } else {
+            prettyPrint("Invalid format yow! Use: event <description> /from <start time> /to <end time>");
+        }
+    }
+
 
     public static void main(String[] args) {
         Yow yow = new Yow();
