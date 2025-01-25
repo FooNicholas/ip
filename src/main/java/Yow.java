@@ -35,6 +35,8 @@ public class Yow {
 
                     case "event" -> handleEventCommand(userInput);
 
+                    case "delete" -> handleDeleteCommand(userInput);
+
                     default -> throw new YowException("What is bro cooking yow. Use a valid command.\n" +
                             "Valid commands: bye, list, mark, unmark, todo, deadline, event, delete");
                 }
@@ -156,7 +158,21 @@ public class Yow {
         }
         Events event = new Events(parts[0], timeParts[0], timeParts[1]);
         checklist.add(event);
-        prettyPrint("Got it. I've added this task:\n  " + event.toString() +
+        prettyPrint("Got it yow. I've added this task:\n  " + event.toString() +
+                "\nNow you have " + checklist.size() + " tasks in the list.");
+    }
+
+    private void handleDeleteCommand(String userInput) throws YowException {
+        String[] parts = userInput.split(" ");
+        if (parts.length != 2) {
+            throw new YowException("Invalid command yow! Use 'delete <number>'.");
+        }
+        int taskNumber = Integer.parseInt(parts[1]) - 1;
+        if (taskNumber < 0 || taskNumber >= checklist.size()) {
+            throw new YowException("Invalid task number yow!");
+        }
+        Task removedTask = checklist.remove(taskNumber);
+        prettyPrint("Noted. I've removed this task yow:\n  " + removedTask.toString() +
                 "\nNow you have " + checklist.size() + " tasks in the list.");
     }
 
