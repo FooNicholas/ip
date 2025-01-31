@@ -10,13 +10,12 @@ public class Yow {
     private List<Task> checklist;
     private final Storage storage;
 
-    /**
-     * Constructor: Initializes the Yow chatbot and loads tasks from storage.
-     *
-     * @throws IOException If an error occurs while loading the tasks from storage.
-     */
-
-    public Yow() throws IOException {
+  /**
+   * Constructor: Initializes the Yow chatbot and loads tasks from storage.
+   *
+   * @throws IOException If an error occurs while loading the tasks from storage.
+   */
+  public Yow() throws IOException, YowException {
         storage = new Storage();
         checklist = storage.loadTasks();
     }
@@ -171,13 +170,13 @@ public class Yow {
         prettyPrint("Bye. Hope to see you again soon yow!");
     }
 
-    /**
-     * The main method of the program.
-     *
-     * @param args Command-line arguments (not used).
-     * @throws IOException If an error occurs while loading or saving tasks.
-     */
-    public static void main(String[] args) throws IOException {
+  /**
+   * The main method of the program.
+   *
+   * @param args Command-line arguments (not used).
+   * @throws IOException If an error occurs while loading or saving tasks.
+   */
+  public static void main(String[] args) throws IOException, YowException {
         Yow yow = new Yow();
         yow.run();
     }

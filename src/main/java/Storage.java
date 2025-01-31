@@ -34,13 +34,13 @@ public class Storage {
         }
     }
 
-    /**
-     * Loads the task list from the storage file.
-     *
-     * @return A list of tasks retrieved from the file.
-     * @throws IOException If an error occurs while reading the file.
-     */
-    public List<Task> loadTasks() throws IOException {
+  /**
+   * Loads the task list from the storage file.
+   *
+   * @return A list of tasks retrieved from the file.
+   * @throws IOException If an error occurs while reading the file.
+   */
+  public List<Task> loadTasks() throws IOException, YowException {
         List<Task> tasks = new ArrayList<>();
         File file = new File(FILE_PATH);
 
@@ -56,7 +56,7 @@ public class Storage {
         return tasks;
     }
 
-    private Task parseTaskFromFile(String line) {
+    private Task parseTaskFromFile(String line) throws YowException {
         String[] parts = line.split(" \\| ");
         if (parts.length < 3) {
             return null;
