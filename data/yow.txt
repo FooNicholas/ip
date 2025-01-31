@@ -1,0 +1,3 @@
+D | 1 | do homework | no idea :-)
+E | 1 | project meeting | Mon 2pm | 4pm
+T | 1 | borrow book
