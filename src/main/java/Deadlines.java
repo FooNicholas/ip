@@ -1,9 +1,16 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 /**
  * Represents a task with a deadline.
  * A Deadlines task has a description, completion status, and a due date.
  */
 public class Deadlines extends Task {
-    private String by;
+    private LocalDateTime deadline;
+    private static final DateTimeFormatter INPUT_FORMATTER1 = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+    private static final DateTimeFormatter INPUT_FORMATTER2 = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+    private static final DateTimeFormatter OUTPUT_FORMATTER = DateTimeFormatter.ofPattern("MMM dd yyyy, h:mm a");
 
     /**
      * Constructs a Deadlines task with a description and due date.
@@ -12,9 +19,22 @@ public class Deadlines extends Task {
      * @param by The due date for the task.
      * @param isDone Whether the task is marked as completed.
      */
-    public Deadlines(String description, String by, boolean isDone) {
+    public Deadlines(String description, String by, boolean isDone) throws YowException {
         super(description);
-        this.by = by;
+        this.isDone = isDone;
+        this.deadline = parseDate(by);
+    }
+
+    private LocalDateTime parseDate(String by) throws YowException {
+        try {
+            return LocalDateTime.parse(by, INPUT_FORMATTER1);
+        } catch (DateTimeParseException e1) {
+            try {
+                return LocalDateTime.parse(by, INPUT_FORMATTER2);
+            } catch (DateTimeParseException e2) {
+                throw new YowException("Invalid date format yow! Use: yyyy-MM-dd HHmm or d/M/yyyy HHmm");
+            }
+        }
     }
 
     /**
@@ -24,7 +44,7 @@ public class Deadlines extends Task {
      */
     @Override
     public String toFileFormat() {
-        return "D | " + (isDone ? "1" : "0") + " | " + description + " | " + by;
+        return "D | " + (isDone ? "1" : "0") + " | " + description + " | " + deadline.format(INPUT_FORMATTER1);
     }
 
     /**
@@ -34,6 +54,6 @@ public class Deadlines extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + " (by: " + deadline.format(OUTPUT_FORMATTER) + ")";
     }
 }
