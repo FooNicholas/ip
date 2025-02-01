@@ -1,10 +1,12 @@
+package yow;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
  * Represents a task with a deadline.
- * A Deadlines task has a description, completion status, and a due date.
+ * A yow.Deadlines task has a description, completion status, and a due date.
  */
 public class Deadlines extends Task {
     private LocalDateTime deadline;
@@ -13,7 +15,7 @@ public class Deadlines extends Task {
     private static final DateTimeFormatter OUTPUT_FORMATTER = DateTimeFormatter.ofPattern("MMM dd yyyy, h:mm a");
 
     /**
-     * Constructs a Deadlines task with a description and due date.
+     * Constructs a yow.Deadlines task with a description and due date.
      *
      * @param description The task description.
      * @param by The due date for the task.
@@ -38,7 +40,7 @@ public class Deadlines extends Task {
     }
 
     /**
-     * Converts the Deadlines task into a formatted string for file storage.
+     * Converts the yow.Deadlines task into a formatted string for file storage.
      *
      * @return A string representation of the task suitable for file storage.
      */
@@ -48,7 +50,7 @@ public class Deadlines extends Task {
     }
 
     /**
-     * Returns a string representation of the Deadlines task.
+     * Returns a string representation of the yow.Deadlines task.
      *
      * @return A formatted string representing the Deadline task.
      */

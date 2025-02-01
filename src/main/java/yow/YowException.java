@@ -1,3 +1,4 @@
+package yow;
 /**
  * Custom exception class for handling errors specific to the Yow application.
  * This exception is thrown when invalid commands or incorrect input formats are encountered.

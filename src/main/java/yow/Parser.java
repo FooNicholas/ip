@@ -1,3 +1,5 @@
+package yow;
+
 /**
  * Parses user input and delegates commands accordingly.
  */

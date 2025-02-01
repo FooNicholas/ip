@@ -1,3 +1,4 @@
+package yow;
 /**
  * Handles user interactions, including displaying messages and prompting for input.
  */
