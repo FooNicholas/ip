@@ -8,14 +8,14 @@ import java.util.List;
 /**
  * Manages the list of tasks.
  */
-class TaskList {
+public class TaskList {
     private final List<Task> tasks;
 
-    TaskList(List<Task> tasks) {
+    public TaskList(List<Task> tasks) {
         this.tasks = tasks;
     }
 
-    Task getTask(int index) {
+    public Task getTask(int index) {
         return tasks.get(index);
     }
 
@@ -23,23 +23,23 @@ class TaskList {
         return tasks;
     }
 
-    Integer getSize() {
+    public Integer getSize() {
         return tasks.size();
     }
 
-    void addTask(Task task) {
+    public void addTask(Task task) {
         tasks.add(task);
     }
 
-    void markTask(int index) throws YowException {
+    public void markTask(int index) throws YowException {
         tasks.get(index).markDone();
     }
 
-    void unmarkTask(int index) throws YowException {
+    public void unmarkTask(int index) throws YowException {
         tasks.get(index).markUndone();
     }
 
-    void deleteTask(int index) throws YowException {
+    public void deleteTask(int index) throws YowException {
         tasks.remove(index);
     }
 

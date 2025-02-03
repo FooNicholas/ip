@@ -2,7 +2,7 @@ package yow;
 /**
  * Handles user interactions, including displaying messages and prompting for input.
  */
-class Ui {
+public class Ui {
 
     private void splitLine() {
         System.out.println("____________________________________________________________");
