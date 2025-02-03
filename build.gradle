@@ -32,8 +32,13 @@ application {
 }
 
 shadowJar {
-    archiveBaseName = "Yow"
-    archiveClassifier = null
+    archiveBaseName.set("Yow")
+    archiveClassifier.set("")
+    archiveVersion.set("")
+    manifest {
+        attributes 'Main-Class': 'yow.Yow'
+    }
+    mergeServiceFiles()
 }
 
 run{

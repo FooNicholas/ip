@@ -3,6 +3,7 @@ package yow;
 import java.io.IOException;
 import java.util.Scanner;
 
+
 public class Yow {
     private final TaskList taskList;
     private final Storage storage;
@@ -22,7 +23,7 @@ public class Yow {
     }
 
     /**
-     * Runs the chatbot to accept user input.
+     * Runs the chatbot to start accepting user input.
      */
     private void run() {
         boolean isRunning = true;

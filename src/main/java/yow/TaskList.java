@@ -11,6 +11,11 @@ import java.util.List;
 public class TaskList {
     private final List<Task> tasks;
 
+    /**
+     * Constructs a TaskList with an existing list of tasks.
+     *
+     * @param tasks The initial list of tasks.
+     */
     public TaskList(List<Task> tasks) {
         this.tasks = tasks;
     }
@@ -27,22 +32,51 @@ public class TaskList {
         return tasks.size();
     }
 
+    /**
+     * Adds a new task to the list.
+     *
+     * @param task The task to be added.
+     */
     public void addTask(Task task) {
         tasks.add(task);
     }
 
+    /**
+     * Marks a task as completed.
+     *
+     * @param index The index of the task to mark as done.
+     * @throws YowException If an invalid index is provided.
+     */
     public void markTask(int index) throws YowException {
         tasks.get(index).markDone();
     }
 
+    /**
+     * Marks a task as not completed.
+     *
+     * @param index The index of the task to mark as not done.
+     * @throws YowException If an invalid index is provided.
+     */
     public void unmarkTask(int index) throws YowException {
         tasks.get(index).markUndone();
     }
 
+    /**
+     * Deletes a task from the list.
+     *
+     * @param index The index of the task to delete.
+     * @throws YowException If an invalid index is provided.
+     */
     public void deleteTask(int index) throws YowException {
         tasks.remove(index);
     }
 
+    /**
+     * Converts the task list into a formatted string representation.
+     * Each task is listed with its index, status, and description.
+     *
+     * @return A formatted string containing all tasks.
+     */
     String stringifyList() {
         StringBuilder listText = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
