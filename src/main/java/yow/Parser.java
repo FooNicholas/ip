@@ -1,5 +1,7 @@
 package yow;
 
+import java.util.List;
+
 /**
  * Parses user input and delegates commands accordingly.
  */
@@ -44,7 +46,11 @@ class Parser {
                 case "event":
                     handleEventCommand(userInput);
                     break;
-                default:
+                case "find":
+                    handleFindCommand(userInput);
+                    break;
+
+            default:
                     ui.prettyPrint("Unknown command yow! Type in 'help' to get command list.");
             }
             storage.saveTasks(taskList.getTasks());
@@ -131,4 +137,25 @@ class Parser {
         ui.prettyPrint("Noted. I've removed this task yow:\n  " + selectedTask);
 
     }
+
+    private void handleFindCommand(String userInput) throws YowException {
+        String[] parts = userInput.split(" ", 2);
+        if (parts.length < 2 || parts[1].trim().isEmpty()) {
+            throw new YowException("OOPS!!! You must provide a keyword to search yow!");
+        }
+
+        String keyword = parts[1].trim();
+        List<Task> matchingTasks = taskList.findTasks(keyword);
+
+        if (matchingTasks.isEmpty()) {
+            ui.prettyPrint("No matching tasks found yow!");
+        } else {
+            StringBuilder response = new StringBuilder("Here are the matching tasks in your list yow:\n");
+            for (int i = 0; i < matchingTasks.size(); i++) {
+                response.append(i + 1).append(". ").append(matchingTasks.get(i)).append("\n");
+            }
+            ui.prettyPrint(response.toString());
+        }
+    }
+
 }

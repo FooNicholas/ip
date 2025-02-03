@@ -1,6 +1,8 @@
 package yow;
 
 import java.util.List;
+import java.util.ArrayList;
+
 
 /**
  * Manages the list of tasks and operations on them.
@@ -83,5 +85,21 @@ public class TaskList {
             listText.append(i + 1).append(". ").append(tasks.get(i).toString()).append("\n");
         }
         return listText.toString();
+    }
+
+    /**
+     * Finds tasks that contain the given keyword in their description.
+     *
+     * @param keyword The keyword to search for.
+     * @return A list of matching tasks.
+     */
+    public List<Task> findTasks(String keyword) {
+        List<Task> matchingTasks = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.description.toLowerCase().contains(keyword.toLowerCase())) {
+                matchingTasks.add(task);
+            }
+        }
+        return matchingTasks;
     }
 }
