@@ -1,7 +1,9 @@
 package main.yow;
 
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
 import yow.Deadlines;
 import yow.YowException;
 
