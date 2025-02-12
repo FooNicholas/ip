@@ -12,13 +12,13 @@ public class DeadlinesTest {
     @Test
     public void testValidDateParsing() throws YowException {
         Deadlines deadline = new Deadlines("Submit Report", "2025-02-10 1400", false);
-        assertEquals("[D][ ] Submit Report (by: Feb 10 2025, 2:00 pm)", deadline.toString());
+        assertEquals("[D][ ] Submit Report (by: Feb 10 2025, 2:00 PM)", deadline.toString());
     }
 
     @Test
     public void testAlternativeDateFormatParsing() throws YowException {
         Deadlines deadline = new Deadlines("Finish Assignment", "10/2/2025 1400", false);
-        assertEquals("[D][ ] Finish Assignment (by: Feb 10 2025, 2:00 pm)", deadline.toString());
+        assertEquals("[D][ ] Finish Assignment (by: Feb 10 2025, 2:00 PM)", deadline.toString());
     }
 
     @Test

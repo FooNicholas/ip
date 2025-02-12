@@ -4,14 +4,22 @@ package yow;
  */
 public class Ui {
 
+    private StringBuilder responseBuffer = new StringBuilder();
+
     private void splitLine() {
         System.out.println("____________________________________________________________");
     }
 
-    void prettyPrint(String text) {
-        splitLine();
-        System.out.println(text);
-        splitLine();
+
+
+    public void prettyPrint(String text) {
+        responseBuffer.append(text).append("\n");
+    }
+
+    public String getResponse() {
+        String response = responseBuffer.toString();
+        responseBuffer.setLength(0); // Clear buffer after returning response
+        return response;
     }
 
     void helpChat() {
