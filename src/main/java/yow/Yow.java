@@ -7,8 +7,8 @@ import java.util.Scanner;
 public class Yow {
     private final TaskList taskList;
     private final Storage storage;
-    private final Ui ui;
-    private final Parser parser;
+    final Ui ui;
+    final Parser parser;
 
     /**
      * Constructor: Initializes the Yow chatbot and loads tasks from storage.
