@@ -46,6 +46,9 @@ class Parser {
                 case "event":
                     handleEventCommand(userInput);
                     break;
+                case "within":
+                    handleWithinCommand(userInput);
+                    break;
                 case "find":
                     handleFindCommand(userInput);
                     break;
@@ -161,5 +164,20 @@ class Parser {
             ui.prettyPrint(response.toString());
         }
     }
+
+    private void handleWithinCommand(String userInput) throws YowException {
+        String input = parseTaskInput(userInput, "within", "/from");
+        String[] parts = input.split(" /from ", 2);
+        String[] timeParts = parts[1].split(" /to ", 2);
+
+        if (timeParts.length != 2) {
+            throw new YowException("Invalid format yow! Use: within <description> /from <start date> /to <end date>");
+        }
+
+        Task withinTask = new DurationTask(parts[0], timeParts[0], timeParts[1], false);
+        taskList.addTask(withinTask);
+        ui.prettyPrint("Got it yow. I've added this task:\n  " + withinTask);
+    }
+
 
 }

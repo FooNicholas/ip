@@ -75,19 +75,27 @@ public class Storage {
         boolean isDone = parts[1].equals("1");
         String description = parts[2];
 
-        return switch (type) {
-            case "T" -> new ToDos(description, isDone);
-            case "D" -> {
+        switch (type) {
+            case "T":
+                return new ToDos(description, isDone);
+
+            case "D":
                 assert parts.length >= 4 : "Deadline task format should have a date";
-                yield new Deadlines(description, parts[3], isDone);
-            }
-            case "E" -> {
+                return new Deadlines(description, parts[3], isDone);
+
+            case "E":
                 assert parts.length >= 5 : "Event task format should have start and end times";
-                yield new Events(description, parts[3], parts[4], isDone);
-            }
-            default -> null;
-        };
+                return new Events(description, parts[3], parts[4], isDone);
+
+            case "W":
+                assert parts.length >= 5 : "DurationTask format should have start and end times";
+                return new DurationTask(description, parts[3], parts[4], isDone);
+
+            default:
+                throw new YowException("Unknown task type in file: " + type);
+        }
     }
+
 
     private void createFileIfNotExists() throws IOException {
         File directory = new File(DIRECTORY_PATH);
