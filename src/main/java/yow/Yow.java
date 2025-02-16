@@ -46,10 +46,12 @@ public class Yow {
     }
 
     /**
-     * The main method of the program.
+     * Entry point of the Yow application.
+     * Initializes and starts the chatbot for task management.
      *
      * @param args Command-line arguments (not used).
      * @throws IOException If an error occurs while loading or saving tasks.
+     * @throws YowException If an invalid task format is encountered.
      */
     public static void main(String[] args) throws IOException, YowException {
         new Yow().run();
