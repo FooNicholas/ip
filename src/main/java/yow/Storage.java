@@ -66,10 +66,10 @@ public class Storage {
     }
 
     private Task parseTaskFromFile(String line) throws YowException {
+        assert line != null : "Task line from file should not be null";
+
         String[] parts = line.split(" \\| ");
-        if (parts.length < 3) {
-            return null;
-        }
+        assert parts.length >= 3 : "Invalid task format in file";
 
         String type = parts[0];
         boolean isDone = parts[1].equals("1");
@@ -77,8 +77,14 @@ public class Storage {
 
         return switch (type) {
             case "T" -> new ToDos(description, isDone);
-            case "D" -> new Deadlines(description, parts[3], isDone);
-            case "E" -> new Events(description, parts[3], parts[4], isDone);
+            case "D" -> {
+                assert parts.length >= 4 : "Deadline task format should have a date";
+                yield new Deadlines(description, parts[3], isDone);
+            }
+            case "E" -> {
+                assert parts.length >= 5 : "Event task format should have start and end times";
+                yield new Events(description, parts[3], parts[4], isDone);
+            }
             default -> null;
         };
     }
