@@ -62,12 +62,16 @@ class Parser {
 
     private int parseTaskNumber(String userInput, String command) throws YowException {
         String[] parts = userInput.split(" ");
+        assert parts.length > 0 : "User input cannot be empty";
+
         if (parts.length != 2) {
             throw new YowException("Invalid command yow! Use '" + command + " <number>'.");
         }
         try {
             int taskNumber = Integer.parseInt(parts[1]) - 1;
-            if (taskNumber < 0 || taskNumber >= taskList.getSize()) {
+            assert taskNumber >= 0 : "Parsed task number should be non-negative";
+
+            if (taskNumber >= taskList.getSize()) {
                 throw new YowException("Invalid task number yow! Ensure it is within the list range.");
             }
             return taskNumber;

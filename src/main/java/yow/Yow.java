@@ -20,6 +20,11 @@ public class Yow {
         this.taskList = new TaskList(storage.loadTasks());
         this.ui = new Ui();
         this.parser = new Parser(taskList, storage, ui);
+
+        assert storage != null : "Storage instance should not be null";
+        assert taskList != null : "TaskList instance should not be null";
+        assert ui != null : "Ui instance should not be null";
+        assert parser != null : "Parser instance should not be null";
     }
 
     /**
