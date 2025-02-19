@@ -77,15 +77,15 @@ public class Storage {
 
         switch (type) {
             case "T":
-                return new ToDos(description, isDone);
+                return new ToDoTask(description, isDone);
 
             case "D":
-                assert parts.length >= 4 : "Deadline task format should have a date";
-                return new Deadlines(description, parts[3], isDone);
+                assert parts.length >= 4 : "DeadlineTask task format should have a date";
+                return new DeadlineTask(description, parts[3], isDone);
 
             case "E":
-                assert parts.length >= 5 : "Event task format should have start and end times";
-                return new Events(description, parts[3], parts[4], isDone);
+                assert parts.length >= 5 : "EventTask task format should have start and end times";
+                return new EventTask(description, parts[3], parts[4], isDone);
 
             case "W":
                 assert parts.length >= 5 : "DurationTask format should have start and end times";

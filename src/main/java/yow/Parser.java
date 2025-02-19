@@ -110,7 +110,7 @@ class Parser {
 
     private void handleTodoCommand(String userInput) throws YowException {
         String input = parseTaskInput(userInput, "todo", "");
-        Task todo = new ToDos(input, false);
+        Task todo = new ToDoTask(input, false);
         taskList.addTask(todo);
         ui.prettyPrint("Got it yow. I've added this task:\n  " + todo);
     }
@@ -118,7 +118,7 @@ class Parser {
     private void handleDeadlineCommand(String userInput) throws YowException {
         String input = parseTaskInput(userInput, "deadline", "/by");
         String[] parts = input.split(" /by ", 2);
-        Task deadline = new Deadlines(parts[0], parts[1], false);
+        Task deadline = new DeadlineTask(parts[0], parts[1], false);
         taskList.addTask(deadline);
         ui.prettyPrint("Got it yow. I've added this task:\n  " + deadline);
     }
@@ -132,7 +132,7 @@ class Parser {
             throw new YowException("Invalid format yow! Use: event <description> /from <start time> /to <end time>");
         }
 
-        Task event = new Events(parts[0], timeParts[0], timeParts[1], false);
+        Task event = new EventTask(parts[0], timeParts[0], timeParts[1], false);
         taskList.addTask(event);
         ui.prettyPrint("Got it yow. I've added this task:\n  " + event);
     }

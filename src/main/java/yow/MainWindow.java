@@ -7,6 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 /**
  * Controller for the main GUI.
@@ -36,6 +37,10 @@ public class MainWindow extends AnchorPane {
         yow = y;
     }
 
+    public void displayWelcomeMessage() {
+        dialogContainer.getChildren().add(DialogBox.getBotDialog("Hello! I'm Yow\nWhat can I do for you yow?", botImage));
+    }
+
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Yow's reply and then appends them to
      * the dialog container. Clears the user input after processing.
@@ -43,14 +48,23 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        yow.parser.parseCommand(input);  // Process the command
-        String response = yow.ui.getResponse();  // Get the captured response
+        yow.parser.parseCommand(input);
+        String response = yow.ui.getResponse();
 
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getBotDialog(response, botImage)
         );
-
         userInput.clear();
+
+        if (input.trim().equalsIgnoreCase("bye")) {
+            endChat();
+        }
+    }
+
+    private void endChat() {
+        dialogContainer.getChildren().add(DialogBox.getBotDialog("Bye. Hope to see you again soon yow!", botImage));
+        Stage stage = (Stage) dialogContainer.getScene().getWindow();
+        stage.close();
     }
 }

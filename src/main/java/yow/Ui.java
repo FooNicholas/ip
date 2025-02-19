@@ -30,8 +30,8 @@ public class Ui {
                 + "4. unmark <task_number> - Marks the specified task as not done.\n"
                 + "5. delete <task_number> - Deletes the specified task.\n"
                 + "6. todo <description> - Adds a new To-Do task with the given description.\n"
-                + "7. deadline <description> /by <date_time> - Adds a new Deadline task with a due date.\n"
-                + "8. event <description> /from <start_time> /to <end_time> - Adds a new Event task with timings.\n"
+                + "7. deadline <description> /by <date_time> - Adds a new DeadlineTask task with a due date.\n"
+                + "8. event <description> /from <start_time> /to <end_time> - Adds a new EventTask task with timings.\n"
                 + "9. within <description> /from <start_time> /to <end_time> - Adds a new task with a completion period.\n");
     }
 

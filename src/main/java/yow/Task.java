@@ -1,7 +1,7 @@
 package yow;
 /**
  * Represents an abstract task with a description and completion status.
- * This serves as a base class for different types of tasks such as ToDos, yow.Deadlines, and Events.
+ * This serves as a base class for different types of tasks such as ToDoTask, yow.DeadlineTask, and EventTask.
  */
 public abstract class Task {
   protected String description;

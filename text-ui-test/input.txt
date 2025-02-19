@@ -4,7 +4,7 @@ list
 mark 1
 list
 unmark 1
-deadline submit report /by Monday
+deadlineTask submit report /by Monday
 event project meeting /from Tuesday 2pm /to 4pm
 list
 bye

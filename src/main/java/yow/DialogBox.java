@@ -14,10 +14,15 @@ public class DialogBox extends HBox {
     private ImageView displayPicture;
 
     public DialogBox(String message, Image img) {
+        this.setFillHeight(true);
+        this.setAlignment(Pos.TOP_RIGHT);
+
         text = new Label(message);
         displayPicture = new ImageView(img);
 
         text.setWrapText(true);
+        text.setMaxWidth(Double.MAX_VALUE);
+
         displayPicture.setFitWidth(100.0);
         displayPicture.setFitHeight(100.0);
 

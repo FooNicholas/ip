@@ -3,14 +3,14 @@ package yow;
  * Represents a To-Do task.
  * A To-Do is a task with only a description and completion status.
  */
-public class ToDos extends Task {
+public class ToDoTask extends Task {
     /**
      * Constructs a To-Do task with a description.
      *
      * @param description The task description.
      * @param isDone Whether the task is marked as completed.
      */
-    public ToDos(String description, boolean isDone) {
+    public ToDoTask(String description, boolean isDone) {
         super(description);
     }
 
