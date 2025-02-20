@@ -81,6 +81,11 @@ public class TaskList {
      * @return A formatted string containing all tasks.
      */
     String stringifyList() {
+
+        if (tasks.isEmpty()) {
+            return "Your task list is empty, yow!";
+        }
+
         StringBuilder listText = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
             listText.append(i + 1).append(". ").append(tasks.get(i).toString()).append("\n");
